@@ -247,8 +247,6 @@ Then add matching logic in `getMomResponse()`.
 
 ## 🚀 Deployment
 
-**Live:** https://rupeesense.lovable.app
-
 ### Deploy Your Own
 
 **Option 1: Vercel**
@@ -293,7 +291,7 @@ npm run build
 
 ## 👤 Author
 
-**Ananya** — VIT Chennai, AI & Robotics specialization  
+*Ctrl+Slay** — VIT Chennai, ArcNight 
 Built in 24 hours for hackathon. Designed for Indian fintech market.
 
 ---
