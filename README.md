@@ -1,35 +1,35 @@
 # 💸 RupeeSense — Your AI Financial Mirror
 
-**Financial clarity for people who've never had it.**
+**Financial clarity through personality-driven spending analysis.**
 
-An AI-powered personal finance app that analyzes your spending with personality, honesty, and a touch of shame. Get real feedback on your money habits—delivered like your mom would.
+An AI-powered personal finance app that analyzes your spending habits and delivers honest, character-driven feedback. Add transactions, get instant reactions, and track your financial health.
 
 ---
 
-## ✨ Features
+## ✨ Core Features
+
+### 💬 **Personality-Driven Feedback**
+Every transaction gets an instant, character-driven response based on merchant and amount.
+
 
 ### 🏥 **Money Health Score**
-Get a 0–100 wellness score based on your spending habits. Categories with high spending (food, entertainment, shopping) reduce your score. Transportation and utilities boost it.
+Get a dynamic 0–100 score based on your weekly spending patterns:
+- High food/entertainment spending → Lower score
+- Responsible transport/utilities → Boosts score
+- Real-time updates as you add transactions
 
-### 💬 **Mom's Reaction**
-Click any transaction and get an immediate, personality-driven response from your AI financial coach. Playful roasts for impulse spending, praise for responsible choices.
+### 📊 **Category Breakdown**
+Visual representation of spending across:
+- 🍔 Food
+- 🛍️ Shopping  
+- 🎬 Entertainment
+- 🚕 Transport
+- 💡 Utilities
 
-**Examples:**
-- "₹450 Swiggy? Beta, aloo gobi at home free hai! 😤"
-- "₹1200 Amazon?! Shaaram karo! Kitna jyada hai!"
-- "₹50 auto? Theek hai beta, responsible hona zaroori hai. ✓"
-
-### 📊 **Weekly Report Card**
-Get grades (A+, A, B, C, D, F) for each spending category with brutal honesty:
-- Food spending > ₹4000? **F - Disaster**
-- Shopping always over budget? **C - Think again**
-- Entertainment ratio high? **D - Too much fun**
-
-### 📈 **Category Breakdown**
-Visual bars showing your spending split across Food, Shopping, Entertainment, Transport, and Utilities. See where your money actually goes.
+See exact amounts and percentage distribution.
 
 ### 📋 **Bulk Import**
-Paste multiple transactions at once:
+Add multiple transactions at once with CSV format:
 ```
 450, Swiggy, Food, 2024-01-10
 1200, Amazon, Shopping, 2024-01-10
@@ -40,27 +40,28 @@ Paste multiple transactions at once:
 
 ## 🎨 Design
 
-Built with **Glassmorphism** aesthetic:
+**Glassmorphism Aesthetic:**
 - Dark gradient background with animated blob animations
-- Frosted glass cards with backdrop blur effect
-- Semi-transparent UI elements with soft glowing borders
-- Smooth transitions and hover states
-- Gradient buttons (cyan to purple)
+- Frosted glass cards with backdrop blur
+- Semi-transparent UI elements with glowing borders
+- Smooth transitions and responsive design
 - Category-specific color coding
 
-**Stack:**
-- React 18 with TypeScript
-- Tailwind CSS for styling
+**Tech Stack:**
+- React 19 with TypeScript
+- TanStack Start (full-stack framework)
+- TanStack Router for navigation
+- Tailwind CSS + Radix UI components
 - Vite for fast builds
-- No external API calls (all logic runs client-side)
+- Cloudflare Workers for deployment
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ or Bun
-- npm, yarn, or bun package manager
+- Node.js 18+
+- npm or bun
 
 ### Installation
 
@@ -71,13 +72,9 @@ cd RS
 
 # Install dependencies
 npm install
-# or
-bun install
 
 # Start dev server
 npm run dev
-# or
-bun run dev
 ```
 
 The app will be available at `http://localhost:5173`
@@ -86,37 +83,31 @@ The app will be available at `http://localhost:5173`
 
 ```bash
 npm run build
-npm run preview
 ```
 
 ---
 
 ## 📱 How to Use
 
-### **Step 1: Add a Transaction**
-- Enter amount (₹)
-- Enter merchant name (Swiggy, Amazon, etc.)
-- Select category (Food, Shopping, Entertainment, Transport, Utilities)
-- Pick date (defaults to today)
-- Click **+ Add Transaction**
+### **Add a Transaction**
+1. Enter amount (₹)
+2. Enter merchant name (Swiggy, Amazon, Netflix, etc.)
+3. Select category (Food, Shopping, Entertainment, Transport, Utilities)
+4. Pick date (defaults to today)
+5. Click **+ Add Transaction**
 
-### **Step 2: See Mom's Reaction**
+### **See Instant Feedback**
 - Click any transaction in the list
 - Wait for AI processing (100-300ms)
 - Read the personality-driven response
 
-### **Step 3: Check Your Health Score**
-- View Money Health Score (top right)
-- See category breakdown with percentage split
-- Watch the colored progress bars
-
-### **Step 4: Get Your Report Card**
-- Click **📋 Get Weekly Report Card**
-- See grades for each category
-- Read overall judgment with context
+### **Track Your Health**
+- View Money Health Score at the top
+- See category breakdown with percentages
+- Watch progress bars update in real-time
 
 ### **Bulk Import** (Optional)
-- Paste CSV-formatted data (amount, merchant, category, date)
+- Paste multiple transactions in CSV format
 - Click **📋 Import**
 - All transactions load instantly
 
@@ -127,31 +118,31 @@ npm run preview
 ```
 RS/
 ├── src/
-│   ├── App.tsx                 # Main component
-│   ├── index.css               # Global styles
-│   └── ...
+│   ├── routes/              # TanStack Router pages
+│   ├── components/          # Reusable UI components
+│   ├── lib/                 # Utilities & helpers
+│   ├── server.ts            # Cloudflare Worker handler
+│   └── app.tsx              # Main app component
+├── dist/
+│   ├── public/              # Static files
+│   └── server/server.js     # Built server
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts
 ├── tailwind.config.js
+├── wrangler.toml            # Cloudflare config
 └── README.md
 ```
 
-### Key Functions
+### Key Logic
 
-**`getMomResponse()`** - Generates personality-driven feedback based on:
-- Merchant name (pattern matching for Swiggy, Amazon, Netflix, etc.)
-- Amount spent
-- Transaction category
-- Total weekly spending
+**Spending Analysis:**
+- Merchant pattern matching (Swiggy, Amazon, Netflix, etc.)
+- Amount-based decision trees
+- Category-specific personality responses
 
-**`generateReportCard()`** - Creates weekly grades:
-- Analyzes spending by category
-- Assigns letter grades (A+ to F)
-- Provides overall judgment
-
-**`calcHealthScore()`** - Calculates 0–100 score:
-- Food spending ratio: -40 points (high impact)
+**Health Score Calculation:**
+- Food ratio: -40 points (highest impact)
 - Entertainment ratio: -30 points
 - Shopping ratio: -20 points
 - Transport/Utilities: Neutral/Positive
@@ -161,138 +152,113 @@ RS/
 ## 💾 State Management
 
 Uses React `useState` for:
-- `transactions` - List of all spending entries
-- `reportCard` - Generated weekly report
+- `transactions` - List of spending entries
 - Form inputs: `amount`, `merchant`, `category`, `date`, `pasteText`
 
-All data is **client-side only** — nothing is sent to servers (except the deployment domain).
+**All data is stored in browser** — nothing is sent to external servers.
 
 ---
 
-## 🎯 Hackathon Build (24-hour)
+## 🎯 Built in 24 Hours
 
-This was built for a 24-hour hackathon with:
+Hackathon-optimized design:
 - ✅ Zero external API calls (hardcoded logic)
 - ✅ Instant responses (no network latency)
-- ✅ Full functionality in < 500 lines of code
+- ✅ Minimal dependencies
+- ✅ Full functionality in modular code
 - ✅ Modern glassmorphism UI
 - ✅ Mobile-responsive design
 
-**Time breakdown:**
-- Hours 0–6: Core logic + inputs (getMomResponse, transaction state)
-- Hours 6–12: UI design (glassmorphism, categories)
-- Hours 12–18: Report card + styling
-- Hours 18–24: Polish, animations, deploy
-
 ---
 
-## 🎨 Customization
+## 🔧 Customization
 
-### Change Mom's Personality
-Edit `getMomResponse()` in `App.tsx`:
+### Change Personality Responses
+Edit response logic in your components:
 
 ```typescript
 if (merchant.includes('Swiggy')) {
-  if (amount > 500) return '₹' + amount + ' Swiggy? [YOUR RESPONSE HERE]';
+  if (amount > 500) return '₹' + amount + ' Swiggy? [YOUR MESSAGE]';
 }
 ```
 
 ### Adjust Health Score Formula
-Modify weights in `calcHealthScore()`:
+Modify category weights in score calculation:
 
 ```typescript
 const score = Math.max(0, 100 - (
-  foodRatio * 40 +           // Change 40 to adjust weight
+  foodRatio * 40 +              // Adjust weight
   entertainmentRatio * 30 +
   shoppingRatio * 20
 ));
 ```
 
 ### Add New Categories
-In the `<select>` dropdown:
-
-```tsx
-<option>Your Category Here</option>
-```
-
-Then add matching logic in `getMomResponse()`.
+1. Add to category select dropdown
+2. Add corresponding response logic
+3. Update health score weights
 
 ---
 
-## 🔧 Tech Stack
+## 📊 Tech Stack Details
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend** | React 18, TypeScript |
-| **Styling** | Tailwind CSS, CSS variables |
-| **Build** | Vite, npm/bun |
-| **Logic** | Pure JavaScript (no external libs) |
-| **Deployment** | Lovable (no-code) |
-
----
-
-## 📊 Features Breakdown
-
-| Feature | Status | Lines of Code |
-|---------|--------|---------------|
-| Add transactions | ✅ | 25 |
-| Bulk import | ✅ | 30 |
-| Health score calc | ✅ | 15 |
-| Mom's response logic | ✅ | 50 |
-| Report card gen | ✅ | 60 |
-| UI/Glassmorphism | ✅ | 200+ |
-| Category breakdown | ✅ | 40 |
+| **Frontend** | React 19, TypeScript |
+| **Framework** | TanStack Start, TanStack Router |
+| **Styling** | Tailwind CSS, Radix UI |
+| **Build** | Vite |
+| **Deployment** | Cloudflare Workers |
+| **State** | React hooks (useState) |
 
 ---
 
 ## 🚀 Deployment
 
-### Deploy Your Own
+### **Cloudflare Workers** (Current)
 
-**Option 1: Vercel**
 ```bash
-npm install -g vercel
-vercel
+# Install Wrangler
+npm install -D wrangler
+
+# Login
+npx wrangler login
+
+# Deploy
+npm run build
+npx wrangler deploy
 ```
 
-**Option 2: Netlify**
-```bash
-npm run build
-# Drag dist/ folder to Netlify
-```
 
-**Option 3: GitHub Pages**
+### Build for Other Platforms
+
 ```bash
 npm run build
-# Push dist/ to gh-pages branch
+# Output in dist/ folder
 ```
 
 ---
 
-## 🎓 Learning & Future Work
+## 🎓 Future Enhancements
 
-### Possible Enhancements
-- [ ] Real UPI SMS parsing (Android intent/accessibility service)
-- [ ] Cloud sync (Supabase/Firebase)
-- [ ] Fraud detection (anomaly scoring)
-- [ ] Multi-user support with auth
-- [ ] Historical data & trends
+Potential additions (not currently implemented):
+- [ ] Claude API for dynamic AI responses
+- [ ] Cloud storage (Supabase/Firebase)
+- [ ] Real UPI SMS parsing
+- [ ] Fraud detection
+- [ ] Historical trends & analytics
 - [ ] Export reports (PDF)
-- [ ] Dark/light mode toggle
-- [ ] Localization (more languages)
-
-### Known Limitations
-- ✋ No real SMS integration (manual input only)
-- ✋ No fraud detection (basic rules only)
-- ✋ No cloud storage (browser-only)
-- ✋ Merchant detection is regex-based (not ML)
+- [ ] Dark/light mode
+- [ ] Multi-language support
+- [ ] Mobile app (React Native)
 
 ---
 
 ## 👤 Author
 
-*Ctrl+Slay** — VIT Chennai, ArcNight 
-Built in 24 hours for hackathon. Designed for Indian fintech market.
+**Ctrl+Slay** — VIT Chennai, ArcNight
+
+Built during 24-hour hackathon. Designed for Indian fintech market.
 
 ---
 
@@ -302,23 +268,14 @@ MIT — Use, modify, and share freely.
 
 ---
 
-## 🙏 Acknowledgments
-
-- Inspired by real pain point: wage workers with ₹0 visibility into spending
-- Mom-voice personality design (desi financial coaching)
-- Glassmorphism trend (modern, sleek aesthetic)
-- Hackathon sprint: prioritize demo over perfection
-
----
-
 ## 📞 Support
 
-**Issues?** Open a GitHub issue or reach out.
+**Issues?** Open a GitHub issue.
 
-**Want to contribute?** Fork, improve, and send a PR.
+**Want to contribute?** Fork and send a PR.
 
 ---
 
-**Start tracking. Get roasted. Take control. 💪**
+**Start tracking. Get honest feedback. Take control. 💪**
 
-*"Financial clarity through mom's wisdom."*
+*"Financial clarity through AI-powered personality."*
